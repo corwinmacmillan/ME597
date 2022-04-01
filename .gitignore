@@ -2,4 +2,4 @@ CircularMotionBag.bag
 devel/
 build/
 logs/
-.catkin_models/
+.catkin_tools/
