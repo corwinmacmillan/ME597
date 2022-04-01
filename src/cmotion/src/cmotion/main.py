@@ -17,6 +17,7 @@ import math
 import matplotlib.pyplot as plt
 from matplotlib import use
 use('TKAgg')
+import numpy as np
 
 
 class Map2Odom:
@@ -41,39 +42,43 @@ class Map2Odom:
 
 
 def Q2():
-    rospy.init_node('Path_taken')
-    # rospack = rospkg.RosPack()
-    # CMotionDir = rospack.get_path('cmotion') + '/Bags/'
-    # player_proc = subprocess.Popen(['rosbag', 'play', 'CircularMotionBag.bag'], cwd=CMotionDir)
+    rospy.init_node('Path_taken_node')
+    #rospack = rospkg.RosPack()
+   # CMotionDir = rospack.get_path('cmotion') + '/Bags/'
+   # player_proc = subprocess.Popen(['rosbag', 'play', 'CircularMotionBag.bag'], cwd=CMotionDir)
     pathPub = Map2Odom()
     rospy.spin()
 
 
 def Q3():
     rospack = rospkg.RosPack()
-    CMotionPath = rospack.get_path('cmotion') + '/Bags/CircularMotionBag.bag'
-    pointCloudBag = rosbag.Bag(CMotionPath)
+    #CMotionPath = rospack.get_path('cmotion') + '/Bags/CircularMotionBag.bag'
+    IMUPath = rospack.get_path('cmotion') + '/Bags/imu_odom.bag'
+    #pointCloudBag = rosbag.Bag(CMotionPath)
     #pathBag = rosbag.Bag('../../../../2022-03-09-17-40-02.bag')
-    # IMUBag = rosbag.Bag('../../../../imu_odom.bag')
+    IMUBag = rosbag.Bag(IMUPath)
 
     imu_acceleration = []
     imu_ang_vel = []
-    for topic, msg, t in pointCloudBag.read_messages(topics=['/imu']):
+    for topic, msg, t in IMUBag.read_messages(topics=['/imu']):
         imu_acceleration.append([msg.linear_acceleration.x, msg.linear_acceleration.y, msg.linear_acceleration.z])
         imu_ang_vel.append([msg.angular_velocity.x, msg.angular_velocity.y, msg.angular_velocity.z])
-    plt.figure(1)
-    plt.plot(imu_acceleration[:, 0])
-    plt.plot(imu_acceleration[:, 1])
-    # plt.plot(imu_acceleration[:, 2])
+    imu_acceleration = np.array(imu_acceleration)
+    imu_ang_vel = np.array(imu_ang_vel)
+    plt.subplot(121)
+    pltax, = plt.plot(imu_acceleration[:, 0])
+    pltay, = plt.plot(imu_acceleration[:, 1])
+    # plt.plot(imu_acceleration[:][2])
     plt.title('IMU Linear Acceleration')
-    plt.legend('x', 'y')
-    plt.figure(2)
+    plt.legend([pltax, pltay], ['ax', 'ay'])
+    plt.subplot(122)
     # plt.plot(imu_ang_vel[:, 0])
     # plt.plot(imu_ang_vel[:, 1])
-    plt.plot(imu_ang_vel[:, 2])
+    pltyaw, = plt.plot(imu_ang_vel[:, 2])
     plt.title('IMU Angular Velocity')
-    plt.legend('yaw')
+    plt.legend([pltyaw], ['yaw'])
     plt.show()
+
 
 
 
