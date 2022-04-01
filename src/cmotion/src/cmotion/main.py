@@ -32,11 +32,11 @@ class Map2Odom:
 
         pose.pose = msg.pose.pose
         pose.header.stamp = rospy.Time.now()
-        pose.header.frame_id = "odom"
+        pose.header.frame_id = "map"
 
         btf.sendTransform((0, 0, 0), (0, 0, 0, 1), rospy.Time.now(), "map", "odom")
         self.path.header.stamp = rospy.Time.now()
-        self.path.header.frame_id = "odom"
+        self.path.header.frame_id = "map"
         self.path.poses.append(pose)
         self.path_publisher.publish(self.path)
 
@@ -52,10 +52,7 @@ def Q2():
 
 def Q3():
     rospack = rospkg.RosPack()
-    #CMotionPath = rospack.get_path('cmotion') + '/Bags/CircularMotionBag.bag'
     IMUPath = rospack.get_path('cmotion') + '/Bags/imu_odom.bag'
-    #pointCloudBag = rosbag.Bag(CMotionPath)
-    #pathBag = rosbag.Bag('../../../../2022-03-09-17-40-02.bag')
     IMUBag = rosbag.Bag(IMUPath)
 
     imu_acceleration = []
@@ -84,6 +81,6 @@ def Q3():
 
 if __name__ == "__main__":
     try:
-        Q3()
+        Q2()
     except rospy.ROSInterruptException:
         pass
