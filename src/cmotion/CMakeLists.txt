@@ -8,12 +8,13 @@ project(cmotion)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  roscpp
   rospy
   tf
+  roslib
   sensor_msgs
   nav_msgs
   geometry_msgs
-  rosbag
 )
 
 ## System dependencies are found with CMake's conventions
@@ -108,7 +109,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES cmotion
-CATKIN_DEPENDS rospy sensor_msgs nav_msgs geometry_msgs rosbag
+CATKIN_DEPENDS roscpp rospy tf sensor_msgs nav_msgs geometry_msgs roslib
 #  DEPENDS system_lib
 )
 
