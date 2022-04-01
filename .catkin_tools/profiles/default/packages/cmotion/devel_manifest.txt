@@ -1,6 +1,0 @@
-cmotion
-/home/user/ME597/Lab2/devel/.private/cmotion/cmake.lock /home/user/ME597/Lab2/devel/./cmake.lock
-/home/user/ME597/Lab2/devel/.private/cmotion/share/cmotion/cmake/cmotionConfig-version.cmake /home/user/ME597/Lab2/devel/share/cmotion/cmake/cmotionConfig-version.cmake
-/home/user/ME597/Lab2/devel/.private/cmotion/share/cmotion/cmake/cmotionConfig.cmake /home/user/ME597/Lab2/devel/share/cmotion/cmake/cmotionConfig.cmake
-/home/user/ME597/Lab2/devel/.private/cmotion/lib/pkgconfig/cmotion.pc /home/user/ME597/Lab2/devel/lib/pkgconfig/cmotion.pc
-/home/user/ME597/Lab2/devel/.private/cmotion/lib/python2.7/dist-packages/cmotion/__init__.py /home/user/ME597/Lab2/devel/lib/python2.7/dist-packages/cmotion/__init__.py
